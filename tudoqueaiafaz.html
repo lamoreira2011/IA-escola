@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tudo que a IA faz — Assistente Escolar</title>
+  <style>
+    :root{
+      --bg:#071016; --fg:#e6f1ff; --muted:#9fb3c8; --card:#0f1720; --accent:#00e5ff; --accent2:#7cf2ff; --chip:#121826; --danger:#ff3b3b;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:Inter, Roboto, Arial, system-ui;background:linear-gradient(180deg,var(--bg),#08121a 60%);color:var(--fg);-webkit-font-smoothing:antialiased}
+
+    .wrap{max-width:980px;margin:28px auto;padding:20px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:48px;height:48px;border-radius:12px;background:conic-gradient(from 180deg,var(--accent),#009ab3 40%,#071016 60%);box-shadow:0 6px 28px rgba(0,229,255,.08)}
+    h1{font-size:26px;margin:0;color:var(--accent)}
+    .sub{color:var(--muted);font-size:13px}
+
+    /* aviso grande */
+    .alert{margin-top:18px;padding:16px;border-radius:12px;background:linear-gradient(90deg,#00b8d9,#00e5ff);color:#002028;text-align:center}
+    .alert b{display:block;font-size:18px}
+    .alert small{opacity:.95}
+
+    main{margin-top:18px}
+    .card{background:var(--card);border:1px solid #111827;border-radius:14px;padding:16px;margin-bottom:14px}
+    h2{margin:0 0 10px 0;color:var(--accent2);font-size:18px}
+
+    ul{padding-left:0;list-style:none;margin:0}
+    li{margin-bottom:10px;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,.02);display:flex;gap:10px;align-items:flex-start;background:linear-gradient(180deg,rgba(255,255,255,0.01),transparent)}
+    li span.tag{display:inline-block;background:var(--chip);color:var(--muted);padding:6px 10px;border-radius:999px;font-size:13px;margin-right:8px}
+
+    .meta{color:var(--muted);font-size:13px}
+
+    .grid{display:grid;grid-template-columns:1fr 380px;gap:16px}
+    @media (max-width:980px){.grid{grid-template-columns:1fr}}
+
+    .right{position:sticky;top:20px}
+    .chip{display:inline-block;background:var(--chip);color:var(--muted);border-radius:999px;padding:6px 10px;font-size:13px;margin:6px 6px 0 0}
+
+    pre.dict{background:#071018;border:1px solid #0b2530;color:#bfefff;padding:12px;border-radius:10px;white-space:pre-wrap;font-size:13px}
+
+    footer{margin-top:18px;color:var(--muted);font-size:13px}
+
+    /* acessibilidade */
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+    .example-box{background:#071826;border:1px solid #0a2a3a;border-radius:10px;padding:12px;margin:8px 0;font-size:13px;color:#9fd8ff}
+    .example-box code{background:#0a1a2a;padding:2px 6px;border-radius:4px;color:#7ce2ff}
+
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <h1>🧠 Tudo que a IA faz</h1>
+          <div class="sub">Lista completa de perguntas e funcionalidades do Assistente Escolar</div>
+        </div>
+      </div>
+      <div class="meta">Versão: Assistente Escolar • Offline</div>
+      <a href="index.html" class="chip" style="margin-left:12px;position:relative;top:8px;">← Voltar ao Assistente</a>
+    </header>
+
+    <div class="alert" role="status" aria-live="polite">
+      <b>🎯 ASSISTENTE ESPECIALIZADO EM COMUNICADOS ESCOLARES</b>
+      <small>Focado em horários, transporte, uniforme, cronogramas e eventos escolares</small>
+    </div>
+
+    <main class="grid">
+      <section>
+        <div class="card" id="horarios">
+          <h2>1. 📅 Horários e Datas</h2>
+          <ul>
+            <li><span class="tag">horário</span> <span class="tag">que horas</span> <span class="tag">quando</span>
+              <div>Informa horários de eventos, feiras, viagens</div>
+              <div class="example-box">
+                <strong>Exemplos:</strong><br>
+                • <code>"Qual o horário do evento?"</code><br>
+                • <code>"Que horas começa a feira?"</code><br>
+                • <code>"Quando é a viagem?"</code>
+              </div>
+            </li>
+            <li><span class="tag">data</span> <span class="tag">dia</span> <span class="tag">quando</span>
+              <div>Fornece datas específicas de eventos escolares</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card" id="cronogramas">
+          <h2>2. 📋 Cronogramas e Agendas</h2>
+          <ul>
+            <li><span class="tag">cronograma</span> <span class="tag">agenda</span> <span class="tag">plano</span>
+              <div>Gera cronogramas personalizados de 1 a 7 dias</div>
+              <div class="example-box">
+                <strong>Exemplos:</strong><br>
+                • <code>"Faz um cronograma de 3 dias"</code><br>
+                • <code>"Gerar agenda da viagem"</code><br>
+                • <code>"Plano de 5 dias de estudo"</code>
+              </div>
+            </li>
+            <li><span class="tag">itinerário</span> <span class="tag">programação</span>
+              <div>Cria programação detalhada com horários</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card" id="transporte">
+          <h2>3. 🚌 Transporte e Deslocamento</h2>
+          <ul>
+            <li><span class="tag">transporte</span> <span class="tag">ônibus</span> <span class="tag">van</span>
+              <div>Informa sobre disponibilidade de transporte escolar</div>
+              <div class="example-box">
+                <strong>Exemplos:</strong><br>
+                • <code>"Vai ter transporte?"</code><br>
+                • <code>"Tem ônibus para o passeio?"</code><br>
+                • <code>"Como é o deslocamento?"</code>
+              </div>
+            </li>
+            <li><span class="tag">carro</span> <span class="tag">deslocamento</span>
+              <div>Orienta sobre responsabilidade dos pais no transporte</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card" id="uniforme">
+          <h2>4. 👕 Uniforme e Vestimenta</h2>
+          <ul>
+            <li><span class="tag">uniforme</span> <span class="tag">roupa</span> <span class="tag">traje</span>
+              <div>Informa sobre obrigatoriedade do uniforme</div>
+              <div class="example-box">
+                <strong>Exemplos:</strong><br>
+                • <code>"Precisa levar uniforme?"</code><br>
+                • <code>"Qual roupa usar no evento?"</code><br>
+                • <code>"É obrigatório o uniforme?"</code>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card" id="localizacao">
+          <h2>5. 📍 Localização e Endereço</h2>
+          <ul>
+            <li><span class="tag">onde</span> <span class="tag">local</span> <span class="tag">endereço</span>
+              <div>Informa locais de eventos (pátio, ginásio, etc.)</div>
+              <div class="example-box">
+                <strong>Exemplos:</strong><br>
+                • <code>"Onde será o evento?"</code><br>
+                • <code>"Qual o local da feira?"</code><br>
+                • <code>"Endereço do passeio"</code>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card" id="inscricoes">
+          <h2>6. 📝 Inscrições e Confirmações</h2>
+          <ul>
+            <li><span class="tag">inscrição</span> <span class="tag">confirmar</span> <span class="tag">presença</span>
+              <div>Orienta sobre processos de inscrição e confirmação</div>
+              <div class="example-box">
+                <strong>Exemplos:</strong><br>
+                • <code>"Como faço a inscrição?"</code><br>
+                • <code>"Precisa confirmar presença?"</code><br>
+                • <code>"Tem link para o formulário?"</code>
+              </div>
+            </li>
+            <li><span class="tag">formulário</span> <span class="tag">link</span>
+              <div>Informa sobre formulários online quando disponíveis</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card" id="viagens">
+          <h2>7. 🚀 Viagens Acadêmicas</h2>
+          <ul>
+            <li><span class="tag">viagem</span> <span class="tag">embarque</span> <span class="tag">ubajara</span>
+              <div>Detalhes sobre viagens acadêmicas e embarque</div>
+              <div class="example-box">
+                <strong>Exemplos:</strong><br>
+                • <code>"Quando é a viagem acadêmica?"</code><br>
+                • <code>"Que horas é o embarque?"</code><br>
+                • <code>"Informações sobre Ubajara"</code>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card" id="semana-crianca">
+          <h2>8. 🎪 Semana da Criança</h2>
+          <ul>
+            <li><span class="tag">semana da criança</span> <span class="tag">children's week</span>
+              <div>Programação e atividades da Semana da Criança</div>
+              <div class="example-box">
+                <strong>Exemplos:</strong><br>
+                • <code>"O que tem na Semana da Criança?"</code><br>
+                • <code>"Atividades do magical games"</code><br>
+                • <code>"Programação da semana"</code>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card" id="regras">
+          <h2>9. 📜 Regras e Responsabilidades</h2>
+          <ul>
+            <li><span class="tag">responsabilidade</span> <span class="tag">pais</span>
+              <div>Orienta sobre responsabilidades dos pais/responsáveis</div>
+              <div class="example-box">
+                <strong>Exemplos:</strong><br>
+                • <code>"Quem é responsável pelo transporte?"</code><br>
+                • <code>"Os pais precisam levar?"</code>
+              </div>
+            </li>
+            <li><span class="tag">pontualidade</span> <span class="tag">chegar</span>
+              <div>Informa sobre importância da pontualidade</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card" id="limites">
+          <h2>10. 🚫 O que a IA NÃO faz</h2>
+          <ul>
+            <li><span class="tag">provas</span> ❌ Não fornece conteúdo de provas ou questões</li>
+            <li><span class="tag">enem</span> ❌ Não ajuda com questões do ENEM</li>
+            <li><span class="tag">matérias</span> ❌ Não ensina conteúdo pedagógico</li>
+            <li><span class="tag">simulados</span> ❌ Não fornece questões de simulados</li>
+            <li><span class="tag">conteúdo</span> ❌ Não explica matérias escolares</li>
+          </ul>
+        </div>
+
+        <div class="card" id="dicas">
+          <h2>💡 Dicas de Uso</h2>
+          <ul>
+            <li>✅ Use perguntas curtas e diretas</li>
+            <li>✅ Carregue comunicados para respostas específicas</li>
+            <li>✅ Use os chips de respostas rápidas</li>
+            <li>✅ Selecione o tipo de escola para respostas personalizadas</li>
+            <li>⚡ Funciona 100% offline - sem internet necessária</li>
+            <li>🎯 Foco em informações logísticas e organizacionais</li>
+          </ul>
+        </div>
+      </section>
+
+      <aside class="right">
+        <div class="card">
+          <h2>🎯 Modos de Operação</h2>
+          <p><strong>Modo Genérico:</strong><br>Respostas padrão baseadas em regras escolares comuns</p>
+          <p><strong>Modo Comunicado:</strong><br>Usa texto carregado para respostas específicas</p>
+          <div class="meta" style="margin-top:12px">💡 Dica: Carregue comunicados para respostas mais precisas</div>
+        </div>
+
+        <div class="card">
+          <h2>🏫 Tipos de Escola</h2>
+          <ul style="margin:0">
+            <li style="background:transparent;border:none;padding:6px 0">• Ensino Fundamental</li>
+            <li style="background:transparent;border:none;padding:6px 0">• Ensino Médio</li>
+            <li style="background:transparent;border:none;padding:6px 0">• Ensino Técnico</li>
+          </ul>
+          <div class="meta" style="margin-top:8px">O tom das respostas se adapta ao tipo selecionado</div>
+        </div>
+
+        <div class="card">
+          <h2>📊 Estatísticas</h2>
+          <div style="text-align:center;padding:10px">
+            <div style="font-size:24px;color:var(--accent);font-weight:bold">10+</div>
+            <div class="meta">Categorias de Perguntas</div>
+          </div>
+          <div style="text-align:center;padding:10px">
+            <div style="font-size:24px;color:var(--accent);font-weight:bold">50+</div>
+            <div class="meta">Palavras-chave Reconhecidas</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>🔧 Funcionalidades Técnicas</h2>
+          <ul style="margin:0">
+            <li style="background:transparent;border:none;padding:6px 0">• Extração automática de datas</li>
+            <li style="background:transparent;border:none;padding:6px 0">• Detecção de horários</li>
+            <li style="background:transparent;border:none;padding:6px 0">• Geração de cronogramas</li>
+            <li style="background:transparent;border:none;padding:6px 0">• Interface responsiva</li>
+          </ul>
+        </div>
+
+      </aside>
+    </main>
+
+    <footer>
+      <div class="meta">Assistente Escolar Offline • Focado em comunicados, agendas e cronogramas • Versão 1.0</div>
+    </footer>
+  </div>
+
+  <script>
+    // Adiciona interação simples para mostrar exemplos
+    document.querySelectorAll('.example-box').forEach(box => {
+      box.style.display = 'none';
+    });
+
+    document.querySelectorAll('li').forEach(li => {
+      li.style.cursor = 'pointer';
+      li.addEventListener('click', function() {
+        const exampleBox = this.querySelector('.example-box');
+        if (exampleBox) {
+          exampleBox.style.display = exampleBox.style.display === 'none' ? 'block' : 'none';
+        }
+      });
+    });
+
+    // Adiciona mensagem de ajuda
+    setTimeout(() => {
+      const helpMsg = document.createElement('div');
+      helpMsg.style.cssText = 'position:fixed;bottom:20px;right:20px;background:var(--card);color:var(--muted);padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.05);font-size:12px;max-width:300px;z-index:1000';
+      helpMsg.innerHTML = '💡 <strong>Dica:</strong> Clique em qualquer item para ver exemplos de perguntas';
+      document.body.appendChild(helpMsg);
+      
+      setTimeout(() => {
+        helpMsg.remove();
+      }, 8000);
+    }, 1000);
+  </script>
+</body>
+</html>
