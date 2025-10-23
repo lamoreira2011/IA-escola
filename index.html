@@ -88,7 +88,7 @@
       <div class="logo"></div>
       <div>
         <h1>Assistente Escolar</h1>
-        <div class="sub">Na lata, só sobre comunicados, agendas e cronogramas.</div>
+        <div class="sub">Dica: Faça perguntas simples!</div>
       </div>
     </div>
 
@@ -152,7 +152,7 @@
         <div class="ai-dot" aria-hidden="true"></div>
         <div>
           <div style="font-weight:700">Assistente Escolar — Offline</div>
-          <div class="status small">Respostas rápidas e objetivas. Sem internet. Sem enrolação.</div>
+          <div class="status small">Respostas rápidas e objetivas off-line </div>
         </div>
       </div>
       <div class="small">Modelo local • Genéricos escolares</div>
@@ -234,7 +234,7 @@ function respondTo(question){
 
   // 4) Transporte
   if(/transporte|ônibus|onibus|van|carro|vai ter transporte|bus|van/.test(q)){
-    return "Transporte: regra geral — pais são responsáveis pelo deslocamento, salvo quando o comunicado informar transporte escolar. Confirme no comunicado/coordenação.";
+    return "Transporte: regra geral, pais são responsáveis pelo deslocamento, salvo quando o comunicado informar transporte escolar. Confirme no comunicado/coordenação.";
   }
 
   // 5) Uniforme / traje
@@ -274,11 +274,11 @@ function respondTo(question){
   }
 
   // 11) Se nada casou, responde genérico e oferece opções
-  return `Na lata: não tenho essa informação exata. Posso:
+  return `Infelizmente eu não tenho essa informação. Eu posso responder perguntas do tipo:
   • Responder horário padrão (ex.: "8h às 18h"),
   • Dizer se precisa uniforme,
   • Gerar um cronograma rápido.
-  Pergunta curta resolve — ex.: "Gerar cronograma 3 dias viagem".`;
+  Se mesmo assim você não conseguir aperte no botão Tudo que a ia faz!`;
 }
 
 /* ====== Funções auxiliares de resposta ====== */
@@ -428,4 +428,5 @@ appendWelcome();
 
 </script>
 </body>
+
 </html
